@@ -3,7 +3,6 @@ const parseArgs = () => {
     const parsedArgs = {};
 
     for(let i = 0; i < args.length; i++) {
-        console.log('2', args[i]);
         if (args[i].startsWith('--')) {
             const key = args[i].slice(2);
             const value = args[i + 1] && !args[i + 1].startsWith('--') ? args[++i] : true;
