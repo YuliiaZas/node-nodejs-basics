@@ -7,17 +7,11 @@ const __dirname = dirname(__filename);
 
 const write = async () => {
     const filePath = join(__dirname, 'files', 'fileToWrite.txt');
-    const writeStream = createWriteStream(filePath, { encoding: 'utf-8' });
-
-    writeStream.on('error', (error) => {
-        console.error('Error while writing file:', error.message);
-    });
+    const writeStream = createWriteStream(filePath, { encoding: 'utf-8' })
+        .on('error', (error) => console.error('Error while writing file:', error.message))
+        .on('finish', () => console.log('Data has been written successfully.'));
 
     process.stdin.pipe(writeStream);
-
-    writeStream.on('finish', () => {
-        console.log('Data has been written successfully.');
-    });
 };
 
 await write();
